@@ -25,7 +25,7 @@ def show_book():
         data = json.load(file)
         for book in data['books']:
             print(f"Title: {book['title']}, Author: {book['author']}, Year: {book['year']}, ISBN: {book['isbn']}")
-            
+
 def search_book():
     def menu():
         print("How do you want to search the book?")
@@ -81,7 +81,7 @@ def delete_book():
             for book in data['books']:
                 if book['title'].lower() == title.lower():
                     data['books'].remove(book)
-                
+
             file.seek(0)
             json.dump(data, file, indent=4)
             file.truncate()
@@ -111,6 +111,12 @@ def delete_book():
         else:
             print("Invalid option.")
             return
+
+
+def load_data():
+    with open("books.json", "r") as f:
+        return json.load(f)
+
 
 def menu():
     print("Welcome to the Smart Library")
