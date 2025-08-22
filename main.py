@@ -12,7 +12,7 @@ def add_book():
     book['author'] = input("Enter book author: ")
     book['year'] = input("Enter publication year: ")
     book['isbn'] = input("Enter ISBN number: ")
-    
+
     with open('books.json', 'r+') as file:
         data = json.load(file)
         data['books'].append(book)
@@ -22,13 +22,18 @@ def add_book():
 
 
 def show_books():
-    pass
+    data = load_data()
+    if not data["books"]:
+        print("No books found.")
+        return
+    print("\n--- All Books ---")
+    for book in data["books"]:
+        print(
+            f"ID: {book['id']}, Title: {book['title']}, "
+            f"Author: {book['author']}, Year: {book['year']}, ISBN: {book['isbn']}"
+        )
+    print("-----------------\n")
 
-def show_book():
-    with open('books.json', 'r') as file:
-        data = json.load(file)
-        for book in data['books']:
-            print(f"Title: {book['title']}, Author: {book['author']}, Year: {book['year']}, ISBN: {book['isbn']}")
 
 def search_book():
     def menu():
