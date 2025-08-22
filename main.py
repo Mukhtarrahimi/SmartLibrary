@@ -2,6 +2,10 @@ import json
 import os
 from random import choice
 
+if os.path.exists('books.json'):
+    with open('books.json', 'w') as file:
+        json.dump({"books": []}, file, indent=4)
+
 def add_book():
     book = {}
     book['title'] = input("Enter book title: ")
