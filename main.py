@@ -19,8 +19,8 @@ def add_book():
         file.seek(0)
         json.dump(data, file, indent=4)
     print("Book added successfully!")
-    
-    
+
+
 def show_books():
     pass
 
@@ -115,6 +115,44 @@ def delete_book():
         else:
             print("Invalid option.")
             return
+
+
+def search_book():
+    print("How do you want to search the book?")
+    print("1. By Title")
+    print("2. By Author")
+    print("3. By Year")
+    print("4. Back to Main Menu")
+    option = input("Enter choice: ")
+
+    data = load_data()
+    results = []
+
+    if option == "1":
+        title = input("Enter title: ")
+        results = [b for b in data["books"] if b["title"].lower() == title.lower()]
+    elif option == "2":
+        author = input("Enter author: ")
+        results = [b for b in data["books"] if b["author"].lower() == author.lower()]
+    elif option == "3":
+        year = input("Enter year: ")
+        results = [b for b in data["books"] if b["year"] == year]
+    elif option == "4":
+        return
+    else:
+        print("Invalid option.")
+        return
+
+    if results:
+        print("\n--- Search Results ---")
+        for book in results:
+            print(
+                f"ID: {book['id']}, Title: {book['title']}, "
+                f"Author: {book['author']}, Year: {book['year']}, ISBN: {book['isbn']}"
+            )
+        print("----------------------\n")
+    else:
+        print("No books found.")
 
 
 def load_data():
