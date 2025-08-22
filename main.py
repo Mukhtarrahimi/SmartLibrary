@@ -60,6 +60,53 @@ def search_book():
         else:
             print("No books found.")
 
+def delete_book():
+    with open('books.json', 'r+') as file:
+        data = json.load(file)
+        def menu():
+            print("How do you want to delete the book?")
+            print("1. Delete by Title")
+            print("2. Delete by Author")
+            print("4. Back to Main Menu")
+            delete_option = input("Enter your choice: ").lower()
+            return delete_option
+        delete_option = menu()
+        if delete_option == '1' or delete_option == 'title':
+            title = input("Enter book title to delete: ")
+            for book in data['books']:
+                if book['title'].lower() == title.lower():
+                    data['books'].remove(book)
+                
+            file.seek(0)
+            json.dump(data, file, indent=4)
+            file.truncate()
+            print("Book deleted successfully!")
+
+        elif delete_option == '2' or delete_option == 'author':
+            author = input("Enter book author to delete: ")
+            for book in data['books']:
+                if book['author'].lower() == author.lower():
+                    data['books'].remove(book)
+            file.seek(0)
+            json.dump(data, file, indent=4)
+            file.truncate()
+            print("Book deleted successfully!")
+        elif delete_option == '3' or delete_option == 'year':
+            year = input("Enter publication year to delete: ")
+            for book in data['books']:
+                if book['year'] == year:
+                    data['books'].remove(book)
+            file.seek(0)
+            json.dump(data, file, indent=4)
+            file.truncate()
+            print("Book deleted successfully!")
+
+        elif delete_option == '4':
+            return
+        else:
+            print("Invalid option.")
+            return
+
 def menu():
     print("Welcome to the Smart Library")
     print("1. Add Book")
