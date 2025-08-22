@@ -13,6 +13,12 @@ def add_book():
         json.dump(data, file, indent=4)
     print("Book added successfully!")
 
+def show_book():
+    with open('books.json', 'r') as file:
+        data = json.load(file)
+        for book in data['books']:
+            print(f"Title: {book['title']}, Author: {book['author']}, Year: {book['year']}, ISBN: {book['isbn']}")
+
 def menu():
     print("Welcome to the Smart Library")
     print("1. Add Book")
