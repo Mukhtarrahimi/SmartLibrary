@@ -19,6 +19,10 @@ def add_book():
         file.seek(0)
         json.dump(data, file, indent=4)
     print("Book added successfully!")
+    
+    
+def show_books():
+    pass
 
 def show_book():
     with open('books.json', 'r') as file:
@@ -118,11 +122,31 @@ def load_data():
         return json.load(f)
 
 
+def save_data(data):
+    with open("books.json", "w") as f:
+        json.dump(data, f, indent=4)
+
+
 def menu():
-    print("Welcome to the Smart Library")
-    print("1. Add Book")
-    print("2. Remove Book")
-    print("3. Search Book")
-    print("4. Exit")
-    choice = input("Enter your choice: ")
-    return choice
+    while True:
+        print(" Welcome to the Smart Library")
+        print("1. Add Book")
+        print("2. Show All Books")
+        print("3. Search Book")
+        print("4. Delete Book")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_book()
+        elif choice == "2":
+            show_books()
+        elif choice == "3":
+            search_book()
+        elif choice == "4":
+            delete_book()
+        elif choice == "5":
+            print(" Exiting... Bye!")
+            break
+        else:
+            print("Invalid choice, try again.")
